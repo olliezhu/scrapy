@@ -17,10 +17,12 @@ class PeriodicLog:
         self,
         stats,
         interval=60.0,
-        ext_stats={},
-        ext_delta={},
+        ext_stats=None,
+        ext_delta=None,
         ext_timing_enabled=False,
     ):
+        ext_stats = {} if ext_stats is None else ext_stats
+        ext_delta = {} if ext_delta is None else ext_delta
         self.stats = stats
         self.interval = interval
         self.multiplier = 60.0 / self.interval
