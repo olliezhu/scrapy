@@ -1,8 +1,9 @@
 from functools import wraps
 
 
-def _embed_ipython_shell(namespace={}, banner=""):
+def _embed_ipython_shell(namespace=None, banner=""):
     """Start an IPython Shell"""
+    namespace = {} if namespace is None else namespace
     try:
         from IPython.terminal.embed import InteractiveShellEmbed
         from IPython.terminal.ipapp import load_default_config
@@ -26,8 +27,9 @@ def _embed_ipython_shell(namespace={}, banner=""):
     return wrapper
 
 
-def _embed_bpython_shell(namespace={}, banner=""):
+def _embed_bpython_shell(namespace=None, banner=""):
     """Start a bpython shell"""
+    namespace = {} if namespace is None else namespace
     import bpython
 
     @wraps(_embed_bpython_shell)
@@ -37,8 +39,9 @@ def _embed_bpython_shell(namespace={}, banner=""):
     return wrapper
 
 
-def _embed_ptpython_shell(namespace={}, banner=""):
+def _embed_ptpython_shell(namespace=None, banner=""):
     """Start a ptpython shell"""
+    namespace = {} if namespace is None else namespace
     import ptpython.repl
 
     @wraps(_embed_ptpython_shell)
@@ -49,8 +52,9 @@ def _embed_ptpython_shell(namespace={}, banner=""):
     return wrapper
 
 
-def _embed_standard_shell(namespace={}, banner=""):
+def _embed_standard_shell(namespace=None, banner=""):
     """Start a standard python shell"""
+    namespace = {} if namespace is None else namespace
     import code
 
     try:  # readline module is only available on unix systems
