@@ -6,6 +6,7 @@ from urllib.parse import urlencode
 import scrapy
 from scrapy.commands import ScrapyCommand
 from scrapy.linkextractors import LinkExtractor
+from security import safe_command
 
 
 class Command(ScrapyCommand):
@@ -29,7 +30,7 @@ class _BenchServer:
         from scrapy.utils.test import get_testenv
 
         pargs = [sys.executable, "-u", "-m", "scrapy.utils.benchserver"]
-        self.proc = subprocess.Popen(pargs, stdout=subprocess.PIPE, env=get_testenv())
+        self.proc = safe_command.run(subprocess.Popen, pargs, stdout=subprocess.PIPE, env=get_testenv())
         self.proc.stdout.readline()
 
     def __exit__(self, exc_type, exc_value, traceback):
